@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonnement</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            width: 100%;
+        }
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .menu li {
+            margin: 0;
+        }
+        .menu a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #575757;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #333;
+        }
+        .text-container {
+            padding: 20px;
+            max-width: 600px; /* Limiting width for readability */
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .down-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .down-menu li {
+            margin: 0 10px;
+        }
+        .down-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="main.html">Accueil</a></li>
+                <li><a href="newMember.html">Abonnement</a></li>
+                <li><a href="saisie.html">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="image-container">
+            <img src="images/image.jpg" alt="espace entrainement"> 
+        </div>
+        <div class="text-container">
+            <p id="greeting-message"></p>
+            <h1 class="logo">Pro Gym</h1>
+            <h1>Qui sommes-nous?</h1>
+            <h3>Un Gym Complet</h3>
+            <p>
+                Au Pro Gym, vous aurez toujours le choix et vous aurez accès à tout ! <br>
+                Vous pouvez faire du cardio, de la musculation, du yoga, de la boxe ou un entraînement fonctionnel en solo.<br>
+                Nous vous proposons des séances privées, en fonction de vos besoins, le tout supervisé par des entraîneurs qualifiés.<br>
+                Pro Gym, c’est votre espace bien-être avec plusieurs services pratiques au même endroit :
+            </p>
+            <ul>
+                <li>Une boutique de suppléments pour t’aider à mieux performer </li>
+                <li>Un salon de coiffure</li>
+                <li>Un bar santé pour combler votre faim </li>
+                <li>Un stationnement intérieur</li>
+            </ul>
+            <p>
+                Nos grands vestiaires avec douches et sauna sont toujours à votre disposition.<br>
+                Notre espace d’entraînement est de qualité.<br>
+                Notre service est professionnel, chaleureux et personnalisé.
+            </p>
+        </div>
+    </main>
+    <footer>
+        <ul class="down-menu">
+            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+            <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        </ul>
+    </footer>
+    <script>
+        let inscrivezVous = document.createElement("button");
+        inscrivezVous.textContent = "Inscrivez-vous";
+        document.querySelector(".text-container").appendChild(inscrivezVous); // Append the button to the text-container
+        inscrivezVous.addEventListener("click",function(){
+            window.location.href="newMember.html"});
+
+            document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const prenom = urlParams.get("prenom" );
+            const nom = urlParams.get("nom");
+
+            const greetingMessage = document.getElementById('greeting-message');
+            if (prenom && nom) {
+                greetingMessage.textContent = `Bonjour ${prenom} ${nom}!`;
+            }
+
+
+
+        })
+    </script>
+</body>
+</html>
