@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head><script type="text/javascript" src="/___vscode_livepreview_injected_script"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonnement</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            width: 100%;
+        }
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .menu li {
+            margin: 0;
+        }
+        .menu a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #575757;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .down-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .down-menu li {
+            margin: 0 10px;
+        }
+        .down-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            width: 100%;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #333; /* Dark color when enabled */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition effect */
+        }
+        input[type="submit"]:disabled {
+            background-color: #aaa; /* Gray color when disabled */
+            cursor: not-allowed; /* Change cursor to indicate that it's not clickable */
+        }
+        input[type="submit"]:enabled:hover {
+            background-color: #575757; /* Darker color on hover when enabled */
+        }
+        .checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="main.html">Accueil</a></li>
+                <li><a href="newMember.html">Abonnement</a></li>
+                <li><a href="saisie.html">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <form id="subscriptionForm" action= "http://127.0.0.1:3000/c:/Users/Admin/Desktop/Monopages/Projet1/main.html" post="get">
+            <label for="Prénom">Prénom:</label>
+            <input type="text" id="Prénom" name="prenom" placeholder="Saisir votre Prénom ..." required pattern="[A-Za-zÀ-ÖØ-ÿ\-\' ]{1,50}">
+
+            <label for="Nom">Nom:</label>
+            <input type="text" id="Nom" name="nom" placeholder="Saisir votre Nom ..." required pattern="[A-Za-zÀ-ÖØ-ÿ\-\' ]{1,50}">
+
+            <label for="dateBirth">Date de naissance:</label>
+            <input type="date" id="dateBirth" name="dateBirth" required>
+
+            <label>
+                <input type="radio" id="choixY" name="choix" value="oui">
+                Oui
+            </label>
+            <label>
+                <input type="radio" id="choixN" name="choix" value="non" checked>
+                Non
+            </label>
+
+            <label for="phone">Téléphone:
+                <input type="tel" id="phone" name="phone" placeholder="Entrer votre téléphone ...">
+            </label>
+
+            <div class="checkbox-container">
+                <label for="acceptRules">J'ai lu et j'accepte les règles</label>
+                <input type="checkbox" id="acceptRules" name="acceptRules" required>
+            </div>
+            <select id="Combobox">
+
+            </select>
+
+            <input type="submit" value="Envoyer" disabled>
+        </form>
+    </div>
+    <footer>
+        <ul class="down-menu">
+            <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        </ul>
+    </footer>
+ <script>
+   document.addEventListener('DOMContentLoaded', function () {
+    // Display greeting message if email parameter is present
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+    const greetingMessage = document.createElement('p');
+    greetingMessage.id = 'greeting-message';
+    document.querySelector('.container').prepend(greetingMessage); // Add greeting message at the top
+
+    if (email) {
+        greetingMessage.textContent = 'Bonjour ' + email;
+    }
+
+    // Handle form input validity
+    const form = document.getElementById('subscriptionForm');
+    const submitBtn = form.querySelector('input[type="submit"]');
+
+    // Function to update submit button state
+    function updateSubmitButtonState() {
+        submitBtn.disabled = !form.checkValidity();
+    }
+
+    // Initial check to set button state
+    updateSubmitButtonState();
+
+    // Add event listeners for input and change events
+    form.addEventListener('input', updateSubmitButtonState);
+    form.addEventListener('change', updateSubmitButtonState);
+
+    // Handle form submission
+    form.addEventListener('submit', function(event) {
+        const nameinput = document.getElementById('Prénom');
+        const lnameinput = document.getElementById('Nom');
+        const dateOfBirth = document.getElementById('dateBirth').value;
+
+        const pattern = /^[A-Za-zÀ-ÖØ-ÿ\-\' ]{1,50}$/;
+
+        // Validate name inputs
+        if (!pattern.test(nameinput.value) || !pattern.test(lnameinput.value)) {
+            window.alert('Entrée invalide');
+            event.preventDefault();
+            return;
+        }
+
+        // Validate date of birth
+        if (!dateOfBirth) {
+            window.alert('Date de naissance requise');
+            event.preventDefault();
+            return;
+        }
+
+        // Calculate age
+        const currentDate = new Date();
+        const birthDate = new Date(dateOfBirth);
+        const age = currentDate.getFullYear() - birthDate.getFullYear();
+        const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        if (age < 18) {
+            window.alert('L\'âge minimal n\'est pas atteint. Vous devez avoir 18 ans ou plus à la date d\'aujourd\'hui.');
+            event.preventDefault();
+
+            const url = `main.html?prenom=${(nameinput.value)}&nom=${(lnameinput.value)}`;
+            window.location.href = url;
+        }
+    });
+});
+
+function Combobox() {
+    const BirthYear = document.getElementById('dateBirth').value;
+    const YearToday = new Date().getFullYear();
+    const AncienMembership = YearToday - parseInt(BirthYear, 10);
+    const oldMember = document.getElementById('choixY');
+    const combobox = document.getElementById('Combobox');
+
+    if (oldMember.checked) {
+        // Clear existing options before adding new ones
+        combobox.innerHTML = '';
+
+        for (let year = BirthYear; year <= YearToday; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            combobox.appendChild(option);
+        }
+    }
+}
+
+</script>
+</body>
+</html>
